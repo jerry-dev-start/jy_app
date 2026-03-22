@@ -12,12 +12,18 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strictNullChecks": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "baseUrl": ".",
     "rootDir": ".",
     "jsx": "react-jsx",
     "allowJs": true,
     "resolveJsonModule": true,
+    "types": [
+      "node",
+      "webpack-env",
+      "@tarojs/taro"
+    ],
     "typeRoots": [
       "node_modules/@types"
     ]
