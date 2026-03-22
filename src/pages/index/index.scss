@@ -1,10 +1,9 @@
 .app-container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .tab-content {
   flex: 1;
-  padding-bottom: 56px; // 为底部导航留出空间
+  padding-bottom: 150rpx; // 为底部导航留出空间
 }

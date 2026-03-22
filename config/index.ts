@@ -1,5 +1,6 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss/webpack'
 import devConfig from './dev'
 import prodConfig from './prod'
 import vitePluginImp from 'vite-plugin-imp'
@@ -39,6 +40,8 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
     },
     mini: {
       postcss: {
+        tailwindcss: { enable: true },
+        autoprefixer: { enable: true },
         pxtransform: {
           enable: true,
           config: {
@@ -55,6 +58,9 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
       },
       webpackChain(chain) {
         chain.resolve.plugin('tsconfig-paths').use(TsconfigPathsPlugin)
+        chain.plugin('weapp-tailwindcss').use(UnifiedWebpackPluginV5, [{
+          appType: 'taro'
+        }])
       }
     },
     h5: {
@@ -70,6 +76,7 @@ export default defineConfig<'webpack5'>(async (merge, { command, mode }) => {
         chunkFilename: 'css/[name].[chunkhash].css'
       },
       postcss: {
+        tailwindcss: { enable: true },
         autoprefixer: {
           enable: true,
           config: {}

@@ -46,10 +46,7 @@ export default function TabBar({ selected, onChange }: TabBarProps) {
           className={`tab-bar__fab ${selected === FAB_INDEX ? 'tab-bar__fab--active' : ''}`}
           onClick={() => handleSwitch(FAB_INDEX)}
         >
-          {selected !== FAB_INDEX && (
-            <View className='tab-bar__fab-pulse' />
-          )}
-          <FabIcon size='28' color='#FFFFFF' />
+          <FabIcon size='60rpx' color='#FFFFFF' />
         </View>
       </View>
 
@@ -75,7 +72,7 @@ export default function TabBar({ selected, onChange }: TabBarProps) {
               className={`tab-bar__item ${isActive ? 'tab-bar__item--active' : ''}`}
               onClick={() => handleSwitch(index)}
             >
-              <IconComp size='22' color={isActive ? COLOR_ACTIVE : COLOR_INACTIVE} />
+              <IconComp size='52rpx' color={isActive ? COLOR_ACTIVE : COLOR_INACTIVE} />
               <Text className={`tab-bar__label ${isActive ? 'tab-bar__label--active' : ''}`}>
                 {tab.label}
               </Text>

@@ -10,11 +10,11 @@ $color-gray-100: #F3F4F6;
 $color-white: #FFFFFF;
 $color-bg: #F0FDF4;
 
-$tab-bar-height: 56px;       // 标准移动端高度
-$fab-size: 64px;              // FAB 比栏高，形成凸起
-$icon-size: 24px;             // 标准图标尺寸
-$fab-icon-size: 28px;         // FAB 图标略大
-$label-size: 20rpx;           // 小程序适配字号
+$tab-bar-height: 150rpx;      // 真机适配，再加高
+$fab-size: 112rpx;             // FAB 缩小
+$icon-size: 52rpx;             // 图标尺寸放大
+$fab-icon-size: 60rpx;         // FAB 图标放大
+$label-size: 24rpx;            // 标签字号放大
 $transition-fast: 0.2s ease;
 
 /* ── 容器 ── */
@@ -32,7 +32,8 @@ $transition-fast: 0.2s ease;
   position: relative;
   display: flex;
   align-items: center;
-  height: $tab-bar-height;
+  min-height: $tab-bar-height;
+  padding-top: 16rpx;
   padding-bottom: env(safe-area-inset-bottom);
   background-color: $color-white;
   border-top: 1rpx solid $color-gray-100;
@@ -47,7 +48,7 @@ $transition-fast: 0.2s ease;
   align-items: center;
   justify-content: center;
   width: 20%;
-  gap: 2px;
+  gap: 4rpx;
   height: 100%;
   position: relative;
 
@@ -57,7 +58,7 @@ $transition-fast: 0.2s ease;
 
   &--active {
     .tab-bar__icon {
-      transform: translateY(-1px);
+      // 选中态不做位移
     }
   }
 }
@@ -78,7 +79,6 @@ $transition-fast: 0.2s ease;
 
   &--active {
     color: $color-primary;
-    font-weight: 600;
   }
 }
 
@@ -90,14 +90,14 @@ $transition-fast: 0.2s ease;
   justify-content: flex-end;
   width: 20%;
   height: 100%;
-  padding-bottom: 8px;
+  padding-bottom: 16rpx;
 }
 
 /* ===== 凸起 FAB 按钮 ===== */
 /* FAB wrapper：底边与栏顶对齐后再上移半个FAB，实现经典半圆凸起 */
 .tab-bar__fab-wrapper {
   position: absolute;
-  bottom: calc(#{$tab-bar-height} - #{$fab-size} * 0.35);
+  bottom: calc(#{$tab-bar-height} - #{$fab-size} * 0.55);
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
@@ -116,10 +116,14 @@ $transition-fast: 0.2s ease;
   box-shadow:
     0 4px 12px rgba(16, 185, 129, 0.3),
     0 1px 3px rgba(0, 0, 0, 0.06);
-  border: 4px solid $color-white;
+  border: 8rpx solid $color-white;
+  animation: fab-glow 2.5s ease-in-out infinite;
+  will-change: box-shadow;
+  transform: translateZ(0);
 
   &:active {
     transform: scale(0.93);
+    animation: none;
     box-shadow:
       0 2px 8px rgba(16, 185, 129, 0.2),
       0 1px 2px rgba(0, 0, 0, 0.04);
@@ -127,6 +131,7 @@ $transition-fast: 0.2s ease;
 
   &--active {
     background: linear-gradient(145deg, $color-primary-dark 0%, color.adjust($color-primary-dark, $lightness: -6%) 100%);
+    animation: none;
     box-shadow:
       0 2px 8px rgba(16, 185, 129, 0.2),
       0 1px 2px rgba(0, 0, 0, 0.04);
@@ -139,40 +144,17 @@ $transition-fast: 0.2s ease;
   height: $fab-icon-size;
 }
 
-/* ── FAB 呼吸光环（单层，克制） ── */
-.tab-bar__fab-pulse {
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  right: -4px;
-  bottom: -4px;
-  border-radius: 50%;
-  border: 2px solid rgba(16, 185, 129, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  animation: fab-breathe 3s ease-in-out infinite;
-
-  /* 第二层隐藏，只保留单层呼吸 */
-  &--delay {
-    display: none;
-  }
-}
-
-/* ── 选中时停止动画 ── */
-.tab-bar__fab--active .tab-bar__fab-pulse {
-  animation: none;
-  opacity: 0;
-}
-
-/* ── 呼吸动画（柔和替代脉冲） ── */
-@keyframes fab-breathe {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0;
+/* ── 呼吸光晕动画 ── */
+@keyframes fab-glow {
+  0%, 100% {
+    box-shadow:
+      0 4px 12px rgba(16, 185, 129, 0.3),
+      0 1px 3px rgba(0, 0, 0, 0.06);
   }
   50% {
-    transform: scale(1.08);
-    opacity: 0.6;
+    box-shadow:
+      0 0 20px rgba(16, 185, 129, 0.5),
+      0 0 40px rgba(16, 185, 129, 0.2),
+      0 4px 12px rgba(16, 185, 129, 0.3);
   }
 }

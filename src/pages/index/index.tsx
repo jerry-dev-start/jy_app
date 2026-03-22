@@ -27,7 +27,10 @@ export default function Index() {
       {/* Tab 内容区 */}
       <View className='tab-content'>
         {TAB_CONTENTS.map((Content, index) => (
-          <View key={index} style={{ display: current === index ? 'block' : 'none' }}>
+          <View key={index} style={current === index
+            ? { display: 'block' }
+            : { visibility: 'hidden', height: 0, overflow: 'hidden' }
+          }>
             <Content />
           </View>
         ))}
