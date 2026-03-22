@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
+import ProfileContent from './content'
 
 export default function Profile() {
-  return <View />
+  return <ProfileContent />
 }

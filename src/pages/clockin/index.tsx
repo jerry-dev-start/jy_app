@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
+import ClockinContent from './content'
 
 export default function Clockin() {
-  return <View />
+  return <ClockinContent />
 }

@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
+import FirstaidContent from './content'
 
 export default function Firstaid() {
-  return <View />
+  return <FirstaidContent />
 }

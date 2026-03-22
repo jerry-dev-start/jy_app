@@ -1,5 +1,5 @@
-import { View } from '@tarojs/components'
+import HealthContent from './content'
 
 export default function Health() {
-  return <View />
+  return <HealthContent />
 }
